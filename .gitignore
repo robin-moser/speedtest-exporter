@@ -1,5 +1,6 @@
 # Go build artifacts
 speedtest-exporter
+!speedtest-exporter/
 
 # IDE
 *.swp
