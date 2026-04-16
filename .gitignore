@@ -1,0 +1,10 @@
+# Go build artifacts
+speedtest-exporter
+
+# IDE
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
