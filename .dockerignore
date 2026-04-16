@@ -1,0 +1,19 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Go build artifacts
+speedtest-exporter
+
+# IDE
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
