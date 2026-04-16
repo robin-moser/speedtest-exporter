@@ -1,7 +1,13 @@
 # speedtest-exporter
 
+[![Release](https://img.shields.io/github/v/release/robin-moser/speedtest-exporter?label=release&sort=semver)](https://github.com/robin-moser/speedtest-exporter/releases)
+[![Docker Image](https://img.shields.io/badge/docker_hub-robinmoser/speedtest--exporter-blue?logo=docker)](https://hub.docker.com/r/robinmoser/speedtest-exporter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/robin-moser/speedtest-exporter)](https://goreportcard.com/report/github.com/robin-moser/speedtest-exporter)
+
 A Prometheus exporter that runs a speedtest on each scrape and exposes the results as metrics.
 Useful for monitoring internet connection performance over time.
+
+Pre-built Docker images are available on Docker Hub under the image name [`robinmoser/speedtest-exporter`](https://hub.docker.com/r/robinmoser/speedtest-exporter) and automatically published on every release.
 
 ## Environment variables
 
@@ -45,6 +51,35 @@ The exporter exposes these Prometheus metrics:
 
 ## Quick start
 
+### Docker
+
+#### Run from Docker Hub (Recommended)
+
+Pull and run the latest published image:
+```bash
+docker run --rm -p 9090:9090 robinmoser/speedtest-exporter
+```
+
+With custom settings:
+```bash
+docker run --rm -p 9090:9090 -e PING_MODE=icmp \
+  --cap-add=NET_RAW robinmoser/speedtest-exporter
+```
+
+Using Docker Compose:
+```yaml
+services:
+  speedtest:
+    image: robinmoser/speedtest-exporter:latest
+    ports:
+      - "9090:9090"
+    environment:
+      - TIMEOUT=60
+    # Uncomment for ICMP mode:
+    # cap_add:
+    #   - NET_RAW
+```
+
 ### Run locally
 
 ```bash
@@ -58,23 +93,6 @@ Then test it:
 
 ```bash
 curl http://localhost:9090/metrics
-```
-### Docker
-
-Build the image:
-```bash
-docker build -t speedtest-exporter .
-```
-
-Run it:
-```bash
-docker run --rm -p 9090:9090 speedtest-exporter
-```
-
-With custom settings:
-```bash
-docker run --rm -p 9090:9090 -e PING_MODE=icmp \
-  --cap-add=NET_RAW speedtest-exporter
 ```
 
 ## Prometheus config
