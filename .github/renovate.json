@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":approveMajorUpdates",
+    ":combinePatchMinorReleases"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions"
+    },
+    {
+      "matchManagers": ["gomod"],
+      "groupName": "go-non-major",
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ]
+}
